@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  bd:
+    image: imgpostgres
+    container_name: bd
+
+    restart: always
+
+    volumes:
+      - $PWD/postgres-data:/var/lib/postgresql/data
+
+  apache:
+    depends_on:
+      - bd
+
+    image: imgapache
+    container_name: apache
+
+    restart: always
+
+    volumes:
+      - $PWD/app:/var/www/html/
+
+    ports:
+      - "8080:80"
+
+networks:
+  default:
+    external:
+      name: docker-course
+    
+
+    
