@@ -1,3 +1,5 @@
+# Instalando Docker no Windows
+
 **Para Windows 10 Pro, Enterprise, e Education**
 
 Faça download do instalador do Docker: 
@@ -13,3 +15,11 @@ Quando o Docker estiver ativo no sistema, uma ''baleia'' será mostrada na barra
 
 
 **Para Windows 10 Home**
+
+Uma vez que o Windows 10 Home não tem suporte a Hyper-V, precisamos fazer download do Docker Toolbox: https://download.docker.com/win/stable/DockerToolbox.exe
+
+Executa o arquivo baixado como administrador
+
+Siga os passos do instalador, instalando os pontos recomendados pelo mesmo.
+
+Finalizada instação, procure pelo `Docker Quickstart Terminal`
