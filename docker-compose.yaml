@@ -1,34 +1,50 @@
 version: '3'
 
 services:
-  bd:
-    image: imgpostgres
-    container_name: bd
+  server1:    
+    image: php:apache
+    container_name: server1
 
     restart: always
 
     volumes:
-      - $PWD/postgres-data:/var/lib/postgresql/data
+      - $PWD/app:/var/www/html/app
 
-  apache:
+  server2:    
+    image: php:apache
+    container_name: server2
+
+    restart: always
+
+    volumes:
+      - $PWD/app:/var/www/html/app
+
+  server3:    
+    image: php:apache
+    container_name: server3
+
+    restart: always
+
+    volumes:
+      - $PWD/app:/var/www/html/app
+  
+  load-balancer:
     depends_on:
-      - bd
-
-    image: imgapache
-    container_name: apache
+      - server1
+      - server2
+      - server3
+    
+    image: nginx
+    container_name: lb-nginx
 
     restart: always
 
     volumes:
-      - $PWD/app:/var/www/html/
+      - $PWD/nginx.conf:/etc/nginx/nginx.conf
 
     ports:
       - "8080:80"
-
 networks:
   default:
     external:
-      name: docker-course
-    
-
-    
+      name: fault-tolerance
